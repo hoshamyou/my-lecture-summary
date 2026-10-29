@@ -1,0 +1,1305 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>History of English — Lecture Notes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:wght@400;500;600&display=swap">
+
+<style>
+/* ── Design tokens ── */
+:root {
+  /* Layout: sticky tab-bar + scrollable lecture panel */
+  --bg:          #f7f4ef;
+  --bg2:         #edeae3;
+  --surface:     #ffffff;
+  --border:      #d8d3c8;
+  --fg:          #1c1a17;
+  --fg2:         #5a5650;
+  --accent:      #8b4a2b;
+  --accent-bg:   #f5ede7;
+  --accent2:     #3d6b5c;
+  --accent2-bg:  #e8f2ee;
+  --tag-bg:      #e4dfd6;
+  --tag-fg:      #3a3630;
+  --lec-color:   #8b4a2b;
+  --ff-display:  'Playfair Display', Georgia, serif;
+  --ff-body:     'Source Sans 3', system-ui, sans-serif;
+  color-scheme:  light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:         #181714;
+    --bg2:        #242220;
+    --surface:    #2a2825;
+    --border:     #3c3a36;
+    --fg:         #f0ede6;
+    --fg2:        #9a9690;
+    --accent:     #e07a50;
+    --accent-bg:  #2e1f17;
+    --accent2:    #5cad90;
+    --accent2-bg: #172820;
+    --tag-bg:     #33302c;
+    --tag-fg:     #d6d1c8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:         #181714;
+  --bg2:        #242220;
+  --surface:    #2a2825;
+  --border:     #3c3a36;
+  --fg:         #f0ede6;
+  --fg2:        #9a9690;
+  --accent:     #e07a50;
+  --accent-bg:  #2e1f17;
+  --accent2:    #5cad90;
+  --accent2-bg: #172820;
+  --tag-bg:     #33302c;
+  --tag-fg:     #d6d1c8;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-body);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100%;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ── Top bar ── */
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding-block: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 21;
+}
+.topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+.site-title {
+  font-family: var(--ff-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -.01em;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+.site-title span { display: block; font-size: .7rem; font-family: var(--ff-body); font-weight: 500; color: var(--fg2); letter-spacing: .04em; text-transform: uppercase; }
+
+/* ── Search ── */
+.search-wrap { position: relative; flex: 1 1 140px; min-width: 120px; max-width: 280px; }
+.search-wrap input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px 6px 30px;
+  font-family: var(--ff-body);
+  font-size: .85rem;
+  color: var(--fg);
+  outline: none;
+}
+.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap svg { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); opacity: .4; pointer-events: none; }
+.search-clear { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--fg2); font-size: 13px; padding: 2px; }
+
+/* theme toggle */
+.theme-btn { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 5px 8px; cursor: pointer; color: var(--fg2); font-size: .8rem; flex-shrink: 0; }
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Tab strip ── */
+.tab-strip-wrap {
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-strip-wrap::-webkit-scrollbar { display: none; }
+.tab-strip {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 0;
+  min-width: max-content;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  padding: 8px 13px;
+  cursor: pointer;
+  font-family: var(--ff-body);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--fg2);
+  letter-spacing: .02em;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+  margin-bottom: -2px;
+}
+.tab-btn:hover { color: var(--accent); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── Main content ── */
+.main { max-width: 1100px; margin: 0 auto; padding-block: 28px 60px; }
+
+.lec-panel { display: none; }
+.lec-panel.active { display: block; }
+
+/* Lecture header */
+.lec-header { margin-bottom: 24px; }
+.lec-eyebrow { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 6px; }
+.lec-title { font-family: var(--ff-display); font-size: 1.65rem; font-weight: 700; line-height: 1.2; text-wrap: balance; color: var(--fg); margin-bottom: 4px; }
+.lec-pages { font-size: .8rem; color: var(--fg2); }
+
+/* Grid layout */
+.lec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 660px) { .lec-grid { grid-template-columns: 1fr; } }
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  min-width: 0;
+}
+.card.wide { grid-column: 1 / -1; }
+.card-title {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--fg2);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.card-title svg { opacity: .55; flex-shrink: 0; }
+
+/* Overview card */
+.overview-text { font-size: .92rem; color: var(--fg); line-height: 1.7; }
+
+/* Key concepts list */
+.concepts { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.concepts li { font-size: .88rem; line-height: 1.55; padding-left: 18px; position: relative; color: var(--fg); }
+.concepts li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.concepts li strong { color: var(--fg); font-weight: 600; }
+
+/* Key terms */
+.terms { display: flex; flex-wrap: wrap; gap: 7px; }
+.term {
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  border-radius: 4px;
+  padding: 4px 9px;
+  font-size: .79rem;
+  font-weight: 500;
+  cursor: default;
+  transition: background .15s;
+}
+.term:hover { background: var(--accent-bg); color: var(--accent); }
+.term.highlight { background: var(--accent-bg); color: var(--accent); outline: 1px solid var(--accent); }
+
+/* Scholars / dates */
+.scholar-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.scholar-list li { font-size: .86rem; display: grid; grid-template-columns: auto 1fr; gap: 0 10px; align-items: start; }
+.scholar-date { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; font-size: .8rem; white-space: nowrap; line-height: 1.55; }
+.scholar-name { color: var(--fg); line-height: 1.55; }
+
+/* Remember this */
+.remember {
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 13px 16px;
+  font-size: .88rem;
+  color: var(--fg);
+  line-height: 1.65;
+}
+.remember strong { color: var(--accent); }
+
+.remember2 {
+  background: var(--accent2-bg);
+  border-left: 3px solid var(--accent2);
+  border-radius: 0 6px 6px 0;
+  padding: 13px 16px;
+  font-size: .88rem;
+  color: var(--fg);
+  line-height: 1.65;
+}
+.remember2 strong { color: var(--accent2); }
+
+/* Search highlight */
+.search-hl { background: #ffee77; color: #111; border-radius: 2px; }
+
+/* No results */
+#no-results { display: none; text-align: center; color: var(--fg2); padding: 60px 20px; font-size: .95rem; }
+
+/* Divider */
+.divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+/* Scrollable table (for Grimm's Law etc.) */
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; font-size: .83rem; width: 100%; }
+th { background: var(--bg2); color: var(--fg2); text-align: left; padding: 6px 10px; font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+td { padding: 6px 10px; border-top: 1px solid var(--border); color: var(--fg); vertical-align: top; }
+td em { color: var(--accent2); font-style: italic; }
+
+/* Responsive fix */
+@media (max-width: 480px) {
+  .lec-title { font-size: 1.3rem; }
+  .topbar-inner { gap: 10px; }
+}
+</style>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="site-title">
+      History of English
+      <span>Baugh &amp; Cable — Interactive Notes</span>
+    </div>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><line x1="9.5" y1="9.5" x2="12.5" y2="12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input type="text" id="search-box" placeholder="Search all lectures…" autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="search-clear" hidden>✕</button>
+    </div>
+    <button class="theme-btn" id="theme-btn" title="Toggle theme">☀︎</button>
+  </div>
+</div>
+
+<!-- TAB STRIP -->
+<div class="tab-strip-wrap">
+  <div class="tab-strip" id="tab-strip">
+    <button class="tab-btn active" data-lec="1">Lec 1</button>
+    <button class="tab-btn" data-lec="2">Lec 2</button>
+    <button class="tab-btn" data-lec="3">Lec 3</button>
+    <button class="tab-btn" data-lec="4">Lec 4</button>
+    <button class="tab-btn" data-lec="5">Lec 5</button>
+    <button class="tab-btn" data-lec="6">Lec 6</button>
+    <button class="tab-btn" data-lec="7a">Lec 7A</button>
+    <button class="tab-btn" data-lec="7b">Lec 7B</button>
+    <button class="tab-btn" data-lec="8a">Lec 8A</button>
+    <button class="tab-btn" data-lec="8b">Lec 8B</button>
+    <button class="tab-btn" data-lec="9a">Lec 9A</button>
+    <button class="tab-btn" data-lec="9b">Lec 9B</button>
+    <button class="tab-btn" data-lec="10">Lec 10</button>
+    <button class="tab-btn" data-lec="11">Lec 11</button>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTENT ═══════════════ -->
+<div class="main">
+<div id="no-results">No results found. Try a different search term.</div>
+
+<!-- ─── LEC 1 ─── -->
+<div class="lec-panel active" id="lec-1">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 1 · Chapter 1 · pp. 13–27</div>
+    <div class="lec-title">English Present and Future</div>
+    <div class="lec-pages">Sections §1–§12</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">Chapter 1 introduces the history of English as a <strong>cultural and scholarly subject</strong>. English is studied not just for linguistic structure but for the historical, political, and social forces that shaped it. The chapter then surveys the current global position of English — approximately <strong>1.5 billion speakers</strong> worldwide — examines its assets and liabilities as a world language, and speculates about its future in a world of shifting demographic and political power.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 4h10M2 7h7M2 10h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Concepts</div>
+      <ul class="concepts">
+        <li><strong>Language is always changing:</strong> living languages never stand still; dead languages (e.g., Classical Latin) stopped changing.</li>
+        <li><strong>Political power drives language spread:</strong> a language gains importance through the political, economic, and military strength of its speakers, not through any internal superiority.</li>
+        <li><strong>English speakers fall into three circles:</strong> native speakers, those who use it as an official second language, and those who use it as a foreign language.</li>
+        <li><strong>Asset — cosmopolitan vocabulary:</strong> English has borrowed from Latin, French, Norse, and dozens of other languages, giving it a uniquely rich word-stock.</li>
+        <li><strong>Asset — inflectional simplicity:</strong> English has shed most of its grammatical endings, making it easier to learn basic communication.</li>
+        <li><strong>Asset — natural gender:</strong> unlike German or French, English uses grammatical gender logically (it = objects; he/she = people).</li>
+        <li><strong>Liability — spelling inconsistency:</strong> English spelling reflects historical pronunciation, not current sound (e.g., <em>knight, through, enough</em>).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms</div>
+      <div class="terms">
+        <span class="term">living language</span>
+        <span class="term">dead language</span>
+        <span class="term">linguistic change</span>
+        <span class="term">analogy</span>
+        <span class="term">sound laws</span>
+        <span class="term">cosmopolitan vocabulary</span>
+        <span class="term">inflectional simplicity</span>
+        <span class="term">natural gender</span>
+        <span class="term">spelling reform</span>
+        <span class="term">world language</span>
+        <span class="term">lingua franca</span>
+        <span class="term">dialect</span>
+      </div>
+    </div>
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M3 11 L7 3 L11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><line x1="4.5" y1="8" x2="9.5" y2="8" stroke="currentColor" stroke-width="1.3"/></svg>Remember This</div>
+      <div class="remember"><strong>The key argument of §4–§5:</strong> no language is inherently superior to another. Languages become important because of the power of the nations that speak them — political, economic, military, and cultural. English became a world language because of British colonialism and American economic dominance, not because it is "better" than other languages.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 2 ─── -->
+<div class="lec-panel" id="lec-2">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 2 · Chapter 2 · pp. 28–49</div>
+    <div class="lec-title">The Indo-European Family of Languages</div>
+    <div class="lec-pages">Sections §13–§28</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">This chapter establishes that English belongs to a vast family — the <strong>Indo-European (IE) family</strong> — which includes most of Europe's languages plus those of Iran and the Indian subcontinent. The discovery of Sanskrit in the late 18th century revealed systematic similarities across these languages, proving they descend from one ancient common ancestor. The chapter surveys all IE branches and discusses theories about the original IE homeland.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 4h10M2 7h7M2 10h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Concepts</div>
+      <ul class="concepts">
+        <li><strong>Language families:</strong> languages sharing a common ancestor are grouped into families; similarity of vocabulary and grammar proves common origin.</li>
+        <li><strong>Sanskrit's importance:</strong> its discovery showed that Greek, Latin, and Sanskrit share systematic patterns — proving a common ancestor language (Proto-Indo-European).</li>
+        <li><strong>Grimm's Law (1822):</strong> systematic consonant shifts in Germanic languages; e.g., Latin <em>p</em> → English <em>f</em> (Latin <em>piscis</em> = English <em>fish</em>; Latin <em>pēs</em> = English <em>foot</em>).</li>
+        <li><strong>Verner's Law:</strong> explains apparent exceptions to Grimm's Law through stress patterns.</li>
+        <li><strong>IE homeland:</strong> most likely the steppes north of the Caspian Sea ("Kurgan culture"); people migrated outward c. 3000–2000 BC.</li>
+        <li><strong>English belongs to:</strong> IE → Germanic → West Germanic → Anglo-Frisian → English.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 7a2.5 2.5 0 0 1 5 0" stroke="currentColor" stroke-width="1.3"/></svg>IE Language Branches</div>
+      <ul class="concepts">
+        <li><strong>Indian:</strong> Sanskrit, Hindi, Urdu, Bengali (~500m speakers)</li>
+        <li><strong>Iranian:</strong> Persian/Farsi, Pashto</li>
+        <li><strong>Hellenic:</strong> Ancient &amp; Modern Greek</li>
+        <li><strong>Italic:</strong> Latin → French, Spanish, Italian, Portuguese, Romanian</li>
+        <li><strong>Germanic:</strong> English, German, Dutch, Norse (Swedish, Norwegian, Danish)</li>
+        <li><strong>Balto-Slavic:</strong> Russian, Polish, Czech; Lithuanian, Latvian</li>
+        <li><strong>Celtic:</strong> Welsh, Irish, Scottish Gaelic, Breton</li>
+        <li><strong>Armenian, Albanian:</strong> single-language branches</li>
+        <li><strong>Anatolian (20th-c. discovery):</strong> Hittite — extinct, but oldest attested IE language</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Scholars</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">Indo-European</span>
+        <span class="term">Proto-Indo-European</span>
+        <span class="term">Grimm's Law</span>
+        <span class="term">Verner's Law</span>
+        <span class="term">cognate</span>
+        <span class="term">sound correspondence</span>
+        <span class="term">Kurgan culture</span>
+        <span class="term">neolithic</span>
+        <span class="term">dialect differentiation</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1786</span><span class="scholar-name">Sir William Jones proposes Sanskrit-Greek-Latin kinship</span></li>
+        <li><span class="scholar-date">1822</span><span class="scholar-name">Jacob Grimm formulates Grimm's Law</span></li>
+        <li><span class="scholar-date">1875</span><span class="scholar-name">Karl Verner explains exceptions (Verner's Law)</span></li>
+        <li><span class="scholar-date">1952</span><span class="scholar-name">Michael Ventris deciphers Linear B (Greek, c. 1400 BC)</span></li>
+      </ul>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Grimm's Law — Quick Reference</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>IE / Latin</th><th>→ Germanic</th><th>Examples</th></tr>
+          <tr><td><em>p</em></td><td><em>f</em></td><td>Lat. <em>piscis</em> → Eng. <em>fish</em>; Lat. <em>pēs</em> → Eng. <em>foot</em></td></tr>
+          <tr><td><em>t</em></td><td><em>þ (th)</em></td><td>Lat. <em>trēs</em> → Eng. <em>three</em></td></tr>
+          <tr><td><em>k</em></td><td><em>h</em></td><td>Lat. <em>centum</em> → Eng. <em>hundred</em></td></tr>
+          <tr><td><em>d</em></td><td><em>t</em></td><td>Lat. <em>dentis</em> → Eng. <em>tooth</em></td></tr>
+          <tr><td><em>bh</em></td><td><em>b/v</em></td><td>Skt. <em>bhārāmi</em> → Eng. <em>bear</em></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 3 ─── -->
+<div class="lec-panel" id="lec-3">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 3 · Chapter 3 · pp. 50–78</div>
+    <div class="lec-title">Old English</div>
+    <div class="lec-pages">Sections §29–§52</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">Before English arrived, Britain had Celtic-speaking peoples and had been under Roman rule for four centuries. In the 5th century AD, Germanic tribes — Angles, Saxons, and Jutes — invaded and established the language that would become English. This chapter covers the nature of Old English (OE) as a <strong>synthetic, highly inflected language</strong>, its four main dialects, its grammar, its rich vocabulary-building resources, its syntax, and its remarkable literary tradition.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 4h10M2 7h7M2 10h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Historical Background</div>
+      <ul class="concepts">
+        <li><strong>Before English:</strong> Celtic peoples (Brythonic = Welsh/Cornish ancestors; Goidelic = Irish/Scottish ancestors) plus Roman settlers.</li>
+        <li><strong>Roman conquest (43 AD):</strong> Britain was a Roman province for ~400 years but Latin had little permanent effect on the spoken language.</li>
+        <li><strong>Germanic invasion (c. 449 AD):</strong> Angles (Northumbria, Mercia), Saxons (Essex, Wessex, Sussex), Jutes (Kent). Celts pushed into Wales, Cornwall, Scotland.</li>
+        <li><strong>Three periods:</strong> Old English (OE) 450–1150 | Middle English (ME) 1150–1500 | Modern English (ModE) 1500–present.</li>
+        <li><strong>Four OE dialects:</strong> Northumbrian, Mercian (together = Anglian), West Saxon, Kentish. <em>West Saxon</em> became the literary standard.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 4h10M2 7h7M2 10h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>OE Grammar (Key Features)</div>
+      <ul class="concepts">
+        <li><strong>Synthetic language:</strong> relations between words shown by <em>inflectional endings</em>, not word order (opposite of Modern English).</li>
+        <li><strong>Nouns:</strong> 5 cases (nominative, genitive, dative, accusative, instrumental), 3 genders (masculine, feminine, neuter — <em>grammatical</em>, not natural).</li>
+        <li><strong>Adjectives:</strong> strong and weak declensions depending on whether preceded by a determiner.</li>
+        <li><strong>Verbs:</strong> strong verbs (change vowel: <em>rīdan–rād–riden</em>) and weak verbs (add dental suffix: <em>loved</em>). Strong verbs are the older, native Germanic type.</li>
+        <li><strong>Definite article:</strong> <em>se, sēo, þæt</em> — fully declined (unlike modern "the").</li>
+        <li><strong>OE Vocabulary:</strong> builds new words by <em>self-explaining compounds</em> (e.g., <em>mōdcræft</em> = "mind-power" = wisdom) and <em>prefixes/suffixes</em>, not borrowing.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms</div>
+      <div class="terms">
+        <span class="term">synthetic language</span>
+        <span class="term">analytic language</span>
+        <span class="term">inflection</span>
+        <span class="term">grammatical gender</span>
+        <span class="term">strong verb</span>
+        <span class="term">weak verb</span>
+        <span class="term">case</span>
+        <span class="term">nominative</span>
+        <span class="term">genitive</span>
+        <span class="term">Danelaw</span>
+        <span class="term">self-explaining compound</span>
+        <span class="term">West Saxon</span>
+        <span class="term">Northumbrian</span>
+        <span class="term">Mercian</span>
+        <span class="term">Kentish</span>
+        <span class="term">Beowulf</span>
+      </div>
+    </div>
+    <div class="card wide">
+      <div class="card-title">OE Literature</div>
+      <div class="remember2"><strong>Two streams of OE literature:</strong> (1) pagan heroic tradition preserved in oral tradition and later written down (e.g., <em>Beowulf</em>, c. 700–1000 AD — the greatest OE poem, ~3,000 lines of alliterative verse about a Geatish hero). (2) Christian tradition following the re-introduction of Christianity (597 AD) — Alfred's translations, Ælfric's homilies, Bede's <em>Ecclesiastical History</em>. OE literature is one of the richest early vernacular literatures in Europe.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 4 ─── -->
+<div class="lec-panel" id="lec-4">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 4 · Chapter 4 · pp. 79–109</div>
+    <div class="lec-title">Foreign Influences on Old English</div>
+    <div class="lec-pages">Sections §53–§80</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">Three foreign languages left their mark on Old English: Celtic (very little), Latin (in three waves), and Old Norse/Scandinavian (enormously influential on everyday vocabulary and grammar). The most dramatic external event was the <strong>Viking Age</strong>, which brought Danes and Norsemen into prolonged contact with the English, resulting in hundreds of everyday words and even changes to the pronoun system.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Celtic &amp; Three Latin Influences</div>
+      <ul class="concepts">
+        <li><strong>Celtic influence:</strong> minimal — mainly place-names (rivers: Thames, Avon, Exe; towns: -caster from <em>castra</em>). Very few common words borrowed.</li>
+        <li><strong>Latin — Zero Period (continental):</strong> before the Anglo-Saxons left the continent; words for trade and Roman culture (<em>street, wine, pound, kitchen</em>).</li>
+        <li><strong>Latin — First Period (via Celtic):</strong> a few additional words absorbed through Celtic peoples in Britain.</li>
+        <li><strong>Latin — Second Period (Christianization):</strong> 597 AD, Augustine's mission. Most important wave: church and learning vocabulary flooded in (<em>bishop, priest, monk, altar, hymn, angel, school</em>).</li>
+        <li><strong>Benedictine Reform (c. 970 AD):</strong> renewed learning brought another wave of Latin scholarly vocabulary.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">The Scandinavian Influence</div>
+      <ul class="concepts">
+        <li><strong>Viking Age (793–1000 AD):</strong> Danish raids begin at Lindisfarne (793); large-scale settlement follows in the <em>Danelaw</em> (roughly northeast England).</li>
+        <li><strong>Amalgamation:</strong> English and Danes intermarried; the two closely related languages mixed freely.</li>
+        <li><strong>Scandinavian place-names:</strong> 1,400+ — <em>-by</em> (farm/town: Derby, Whitby), <em>-thorpe</em> (village), <em>-thwaite</em> (meadow). Heaviest in Yorkshire &amp; Lincolnshire.</li>
+        <li><strong>Loanwords:</strong> everyday words — <em>sky, window, egg, knife, take, call, die, husband, sister, ugly, wrong, ill, happy, meek, loose</em>.</li>
+        <li><strong>Form words:</strong> the pronouns <em>they, them, their</em> replace OE <em>hīe, him, hiera</em> — a Scandinavian form. Also <em>both, same, till, though</em>.</li>
+        <li><strong>Grammar effect:</strong> contact with Norse accelerated the loss of OE inflectional endings — both languages became "simpler" together.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">Danelaw</span>
+        <span class="term">Viking Age</span>
+        <span class="term">-by (place-name)</span>
+        <span class="term">-thorpe (place-name)</span>
+        <span class="term">loanword</span>
+        <span class="term">form words</span>
+        <span class="term">wapentake</span>
+        <span class="term">outlaw (< ON)</span>
+        <span class="term">Benedictine Reform</span>
+        <span class="term">Christianization</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">597</span><span class="scholar-name">Augustine's mission → Christianization of England</span></li>
+        <li><span class="scholar-date">793</span><span class="scholar-name">First Viking raid: Lindisfarne</span></li>
+        <li><span class="scholar-date">878</span><span class="scholar-name">Treaty of Wedmore: King Alfred &amp; Danes divide England</span></li>
+        <li><span class="scholar-date">c. 970</span><span class="scholar-name">Benedictine Reform — second Latin wave</span></li>
+      </ul>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember"><strong>The pronoun shift is uniquely dramatic:</strong> <em>they / them / their</em> are Scandinavian words that replaced the native OE pronouns. This is extraordinarily rare — languages almost never borrow such basic grammatical words. It shows just how deeply Norse and English fused in the Danelaw.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 5 ─── -->
+<div class="lec-panel" id="lec-5">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 5 · Chapter 5 · pp. 110–127</div>
+    <div class="lec-title">The Norman Conquest and the Subjection of English, 1066–1200</div>
+    <div class="lec-pages">Sections §81–§92</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">The Norman Conquest of 1066 is the single most important event in the external history of English. William the Conqueror's victory at Hastings placed a French-speaking ruling class over an English-speaking population. For roughly 150 years, English became primarily the language of the lower classes while <strong>French was the language of power</strong> — government, law, literature, and the court. Yet English survived, and the two languages began their long process of blending.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">The Conquest &amp; Its Immediate Effects</div>
+      <ul class="concepts">
+        <li><strong>Battle of Hastings (Oct 14, 1066):</strong> Harold killed; William of Normandy becomes William I of England.</li>
+        <li><strong>Norman settlement:</strong> English landowners replaced by Normans; French-speaking aristocracy controls church, government, and courts.</li>
+        <li><strong>English demoted:</strong> English is still spoken by the majority but has no prestige; French is the language of the ruling class.</li>
+        <li><strong>French literature flourishes</strong> at the English court — Anglo-Norman, a dialect of Old French, becomes the literary prestige language.</li>
+        <li><strong>Fusion begins:</strong> intermarriage between French and English speakers was common by ~1200, blurring ethnic lines.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Language Use by Class</div>
+      <ul class="concepts">
+        <li><strong>Upper class:</strong> French for prestige, English in daily life. Even nobles eventually bilingual by 1200.</li>
+        <li><strong>Middle class:</strong> English-dominant, but learned French for upward mobility and trade.</li>
+        <li><strong>Church:</strong> Latin for liturgy; French for administration; English for preaching to ordinary people.</li>
+        <li><strong>English never dies:</strong> it continued as the spoken vernacular of the vast majority. The language was not replaced — it was suppressed socially.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom: 14px">
+        <span class="term">Norman Conquest</span>
+        <span class="term">Anglo-Norman</span>
+        <span class="term">Battle of Hastings</span>
+        <span class="term">trilingualism</span>
+        <span class="term">prestige language</span>
+        <span class="term">subjection of English</span>
+        <span class="term">vernacular</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1066</span><span class="scholar-name">Battle of Hastings; William I crowned king</span></li>
+        <li><span class="scholar-date">1086</span><span class="scholar-name">Domesday Book compiled (in Latin)</span></li>
+        <li><span class="scholar-date">c. 1200</span><span class="scholar-name">English and French nobility begin to fuse; bilingualism common</span></li>
+      </ul>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember"><strong>English "survived" — it was never replaced.</strong> The Norman Conquest did not extinguish English; it submerged it socially. The majority population kept speaking English throughout. What changed was prestige: for ~150 years, English had none. This social suppression, paradoxically, accelerated language change, because English lost its written standard and each dialect evolved freely.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 6 ─── -->
+<div class="lec-panel" id="lec-6">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 6 · Chapters 6–7 (start) · pp. 128–157</div>
+    <div class="lec-title">The Reestablishment of English, 1200–1500</div>
+    <div class="lec-pages">Sections §93–§120</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">By 1200, conditions had changed dramatically. The loss of Normandy in 1204 forced the English nobility to choose between England and France. The Hundred Years' War and the rise of the middle class fueled anti-French sentiment and English nationalism. By the 14th century, English had returned to official use in law courts and schools. This lecture also begins Chapter 7 on the major grammatical changes of <strong>Middle English</strong> — the dramatic loss of inflectional endings.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Return of English to Prestige</div>
+      <ul class="concepts">
+        <li><strong>Loss of Normandy (1204):</strong> King John loses Normandy to France. English barons must choose sides — most stay in England and become "English."</li>
+        <li><strong>Separation of nobility:</strong> the English and French branches of the same families had to split; this made the English nobility truly English-speaking.</li>
+        <li><strong>Reaction against foreigners:</strong> Henry III's favoritism toward French courtiers provoked nationalist anger.</li>
+        <li><strong>Hundred Years' War (1337–1453):</strong> century-long conflict with France crystallized English national identity.</li>
+        <li><strong>Rise of the middle class:</strong> merchants, craftsmen — English-speaking — gained social and political power.</li>
+        <li><strong>English in law (1362):</strong> Statute of Pleading — English replaces French in courts.</li>
+        <li><strong>English in schools (1385):</strong> John of Trevisa notes that French is no longer used for instruction.</li>
+        <li><strong>English literature revives:</strong> Chaucer (c. 1387), Langland, Gower all write in English.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Middle English Grammar Changes (§111–§120)</div>
+      <ul class="concepts">
+        <li><strong>Greatest change in ME:</strong> loss of inflectional endings. English transforms from synthetic to analytic.</li>
+        <li><strong>Nouns:</strong> from many declensional classes to one: <em>-es</em> for genitive and plural. Four cases → effectively two (subject/object).</li>
+        <li><strong>Adjectives:</strong> lose all case and gender endings; only <em>-e</em> for plural and weak forms survives briefly.</li>
+        <li><strong>Pronouns:</strong> she replaces OE hēo; Scandinavian <em>they/them/their</em> spread south into standard English.</li>
+        <li><strong>Verbs:</strong> strong verb classes collapse; many strong verbs become weak. <em>-eth</em> (Southern) vs. <em>-(e)s</em> (Northern) endings.</li>
+        <li><strong>Word order:</strong> becomes fixed (Subject–Verb–Object) to compensate for lost inflections.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">Statute of Pleading</span>
+        <span class="term">Hundred Years' War</span>
+        <span class="term">analytic language</span>
+        <span class="term">inflectional loss</span>
+        <span class="term">strong verb → weak</span>
+        <span class="term">grammatical gender lost</span>
+        <span class="term">fixed word order</span>
+        <span class="term">Chaucer</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1204</span><span class="scholar-name">Loss of Normandy; English nobility forced to choose</span></li>
+        <li><span class="scholar-date">1337</span><span class="scholar-name">Hundred Years' War begins</span></li>
+        <li><span class="scholar-date">1362</span><span class="scholar-name">Statute of Pleading: English returns to law courts</span></li>
+        <li><span class="scholar-date">1385</span><span class="scholar-name">Trevisa: English replaces French in schools</span></li>
+        <li><span class="scholar-date">c. 1387</span><span class="scholar-name">Chaucer begins <em>Canterbury Tales</em></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 7A ─── -->
+<div class="lec-panel" id="lec-7a">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 7A · Chapter 7 · pp. 158–177</div>
+    <div class="lec-title">Middle English — Part A: French Influence on Vocabulary</div>
+    <div class="lec-pages">Sections §121–§145</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">The greatest legacy of the Norman Conquest is the <strong>massive French influence on English vocabulary</strong>. Thousands of French words entered English, covering government, law, the church, the military, food, fashion, and the arts. This section examines the vocabulary in detail — which domains were affected, when borrowing was heaviest (1250–1400), and how French and English words came to coexist with subtle differences in meaning or register.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">French Vocabulary by Domain</div>
+      <ul class="concepts">
+        <li><strong>Government/admin:</strong> <em>government, minister, crown, state, parliament, council, authority</em></li>
+        <li><strong>Church:</strong> <em>religion, prayer, sermon, abbey, friar, cardinal, preach</em></li>
+        <li><strong>Law:</strong> <em>justice, judge, jury, crime, prison, accuse, verdict, plaintiff</em></li>
+        <li><strong>Military:</strong> <em>army, battle, soldier, siege, enemy, navy, retreat, captain</em></li>
+        <li><strong>Fashion/social life:</strong> <em>fashion, dress, jewel, gown, dinner, supper, feast, roast</em></li>
+        <li><strong>Art/learning:</strong> <em>art, music, poetry, grammar, study, university, medicine, anatomy</em></li>
+        <li><strong>Animal/food distinction:</strong> live animal (OE word) vs. meat (French word): <em>cow–beef, sheep–mutton, pig–pork, calf–veal</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Nature of French Borrowing</div>
+      <ul class="concepts">
+        <li><strong>Anglo-Norman vs. Central French:</strong> two types of French words entered — Anglo-Norman (older, from the Conquest) and Central French (Paris dialect, later). Some words entered twice: <em>warranty / guarantee, warden / guardian</em>.</li>
+        <li><strong>Period of greatest influence: 1250–1400</strong> — after the two peoples fully merged, borrowing peaked.</li>
+        <li><strong>Assimilation:</strong> French words were anglicized in spelling and pronunciation.</li>
+        <li><strong>Loss of native words:</strong> some OE words disappeared; French synonyms took their place.</li>
+        <li><strong>Differentiation in meaning:</strong> often both words survive with different nuances (<em>ask / question, begin / commence, holy / sacred</em>).</li>
+        <li><strong>Synonyms at three levels:</strong> Anglo-Saxon (plain) + French (polite) + Latin (learned): e.g., <em>rise / mount / ascend; ask / question / interrogate</em>.</li>
+        <li><strong>Latin borrowings:</strong> "aureate" (gilded) style poets used heavy Latin vocabulary in the 15th c.</li>
+        <li><strong>Low Countries influence:</strong> trade words — <em>dock, skipper, deck, freight, buoy</em>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms</div>
+      <div class="terms">
+        <span class="term">Anglo-Norman</span>
+        <span class="term">Central French</span>
+        <span class="term">aureate terms</span>
+        <span class="term">triplets (OE/French/Latin)</span>
+        <span class="term">semantic differentiation</span>
+        <span class="term">doublets</span>
+        <span class="term">loanword assimilation</span>
+        <span class="term">prestige borrowing</span>
+        <span class="term">cow–beef distinction</span>
+      </div>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember"><strong>The three-level vocabulary is one of English's defining features:</strong> plain Anglo-Saxon words for everyday use, French words for more polished or official contexts, and Latin words for formal/learned contexts. This gives English its enormous richness but also its complexity — and explains why English has so many near-synonyms with slightly different registers.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 7B ─── -->
+<div class="lec-panel" id="lec-7b">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 7B · Chapter 7–8 (start) · pp. 178–198</div>
+    <div class="lec-title">Middle English — Part B: Dialects &amp; Standard English</div>
+    <div class="lec-pages">Sections §146–§155</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">Middle English was not one language but many dialects, each with distinct features. This section traces the emergence of a <strong>written standard</strong> from the London dialect in the 14th–15th centuries, which eventually became the basis of Modern English. The lecture then opens Chapter 8, examining how the transition to the Modern period changed conditions for grammar and vocabulary.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Middle English Dialects</div>
+      <ul class="concepts">
+        <li><strong>Five ME dialects:</strong> Northern (from Northumbrian OE), East Midland, West Midland, Southern, Kentish.</li>
+        <li><strong>East Midland:</strong> spoken in London, Oxford, Cambridge — geographically and demographically central; became the basis of Standard English.</li>
+        <li><strong>Northern dialect</strong> was linguistically progressive (e.g., <em>-s</em> verb endings) but never became standard.</li>
+        <li><strong>Chaucer wrote in East Midland</strong> London dialect — his prestige helped fix this dialect as the norm.</li>
+        <li><strong>Dialect maps:</strong> "isoglosses" — lines on a map marking where one dialect feature ends and another begins.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Rise of Standard English</div>
+      <ul class="concepts">
+        <li><strong>London's importance:</strong> London was the political capital, the commercial center, and the seat of courts and government — all reasons its speech gained prestige.</li>
+        <li><strong>Chancery Standard:</strong> the written language of government documents in the 15th c. — more uniform than literary English; provided a bureaucratic written standard.</li>
+        <li><strong>Caxton &amp; printing (1476):</strong> the printing press massively accelerated the spread and fixity of a London standard — printed books needed one spelling.</li>
+        <li><strong>Spread incomplete:</strong> regional dialects survived in speech; the standard was primarily a written norm.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Changing Conditions (Ch.8 opening)</div>
+      <ul class="concepts">
+        <li><strong>The Renaissance:</strong> the 15th–16th centuries brought new learning, the printing press, and the rediscovery of Greek and Latin classics.</li>
+        <li><strong>Problems of the vernacular:</strong> was English capable of expressing learned and literary material? Many doubted it — Latin was still preferred by scholars.</li>
+        <li><strong>Struggle for recognition:</strong> writers argued that English was a worthy vehicle for learning and literature.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">ME dialects</span>
+        <span class="term">East Midland</span>
+        <span class="term">Chancery Standard</span>
+        <span class="term">isogloss</span>
+        <span class="term">Standard English</span>
+        <span class="term">prestige dialect</span>
+        <span class="term">printing press</span>
+        <span class="term">William Caxton</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">c. 1387</span><span class="scholar-name">Chaucer's <em>Canterbury Tales</em> in London English</span></li>
+        <li><span class="scholar-date">c. 1430</span><span class="scholar-name">Chancery Standard emerges in government documents</span></li>
+        <li><span class="scholar-date">1476</span><span class="scholar-name">Caxton sets up first printing press in England</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 8A ─── -->
+<div class="lec-panel" id="lec-8a">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 8A · Chapter 8 · pp. 199–218</div>
+    <div class="lec-title">The Renaissance, 1500–1650 — Part A</div>
+    <div class="lec-pages">Sections §152–§172</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">The Renaissance brought an explosion of new knowledge and a crisis of vocabulary. English needed thousands of new words. This produced the <strong>"inkhorn controversy"</strong> — a fierce debate about whether to borrow learned words from Latin and Greek or build on native English resources. The period also saw early attempts at spelling reform and the first English dictionaries.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">The Vocabulary Crisis &amp; Inkhorn Debate</div>
+      <ul class="concepts">
+        <li><strong>The problem:</strong> English had no words for dozens of new scientific, philosophical, and legal concepts introduced from Latin and Greek texts.</li>
+        <li><strong>Inkhorn terms:</strong> Latin/Greek borrowings criticized as pedantic, obscure, or un-English. Called "inkhorn" because they seemed to come straight from a scholar's inkpot.</li>
+        <li><strong>Opponents of borrowing (purists):</strong> Sir John Cheke, Thomas Wilson — argued English should develop from native resources; criticized affected Latin words.</li>
+        <li><strong>Defenders of borrowing:</strong> Sir Thomas Elyot, Richard Mulcaster — argued English needed the new words and would absorb them naturally.</li>
+        <li><strong>Outcome (compromise):</strong> borrowing won. Most inkhorn terms were rejected, but hundreds of useful Latin/Greek words were permanently adopted.</li>
+        <li><strong>Permanent additions:</strong> <em>education, system, benefit, capacity, celebrate, ingenious, industry, modern, relevant</em> — all Renaissance borrowings.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Orthography &amp; Dictionary</div>
+      <ul class="concepts">
+        <li><strong>Problem of spelling:</strong> English spelling was chaotic — no standardization, every scribe spelled differently.</li>
+        <li><strong>John Hart (1551, 1569):</strong> proposed phonetic spelling reform — spell as you pronounce.</li>
+        <li><strong>William Bullokar (1580):</strong> devised a reformed alphabet with extra symbols.</li>
+        <li><strong>Spelling was never reformed</strong> — the printing press, by fixing existing inconsistent spellings, actually made reform harder.</li>
+        <li><strong>Dictionaries of hard words:</strong> Robert Cawdrey's <em>Table Alphabeticall</em> (1604) — first English dictionary; defined "hard words" borrowed from Latin, Greek, French.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Scholars</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">inkhorn terms</span>
+        <span class="term">neologism</span>
+        <span class="term">spelling reform</span>
+        <span class="term">purist</span>
+        <span class="term">loanword enrichment</span>
+        <span class="term">native vs. borrowed</span>
+        <span class="term">aureate diction</span>
+        <span class="term">hard-word dictionary</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1551</span><span class="scholar-name">John Hart's spelling reform proposals</span></li>
+        <li><span class="scholar-date">1580</span><span class="scholar-name">William Bullokar, <em>Booke at Large</em></span></li>
+        <li><span class="scholar-date">1604</span><span class="scholar-name">Cawdrey's <em>Table Alphabeticall</em> — first English dictionary</span></li>
+        <li><span class="scholar-date">c. 1590s</span><span class="scholar-name">Shakespeare's plays — vocabulary explosion (~20,000 words)</span></li>
+      </ul>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember"><strong>Shakespeare's vocabulary:</strong> Shakespeare used approximately 20,000 different words — an extraordinary range. He both borrowed and coined freely, contributing hundreds of words now common in English. His pronunciation was significantly different from modern English — closer to Irish or some American accents than to modern RP British English.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 8B ─── -->
+<div class="lec-panel" id="lec-8b">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 8B · Chapter 8 · pp. 219–249</div>
+    <div class="lec-title">The Renaissance, 1500–1650 — Part B</div>
+    <div class="lec-pages">Sections §173–§185</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">This section covers the major <strong>sound changes</strong> that transformed Middle English pronunciation into Early Modern English, especially the Great Vowel Shift, as well as the grammatical features of the Renaissance period (changes to nouns, adjectives, pronouns, and verbs). The period is characterized by great freedom and flexibility in grammar that contrasts with the standardization to come.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">The Great Vowel Shift (§177)</div>
+      <ul class="concepts">
+        <li><strong>What it is:</strong> a systematic raising of all long vowels in English, occurring c. 1400–1600. The two highest vowels (already at the top of the mouth) had nowhere to go — they became diphthongs.</li>
+        <li><strong>ME <em>ī</em> [iː] → ModE <em>i</em> [aɪ]:</strong> ME <em>tīme</em> [tiːmə] → Eng. <em>time</em> [taɪm]</li>
+        <li><strong>ME <em>ū</em> [uː] → ModE <em>ou</em> [aʊ]:</strong> ME <em>hūs</em> [huːs] → Eng. <em>house</em> [haʊs]</li>
+        <li><strong>ME <em>ē</em> [eː] → ModE <em>ee</em> [iː]:</strong> ME <em>mēte</em> → Eng. <em>meat</em></li>
+        <li><strong>Why it explains spelling:</strong> English spelling was fixed before/during the shift; hence <em>name</em> has an <em>a</em> because it was once pronounced like <em>ah</em>.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Renaissance Grammar</div>
+      <ul class="concepts">
+        <li><strong>Nouns:</strong> essentially modern by 1500; <em>-s</em> plural and genitive fully established.</li>
+        <li><strong>Adjectives:</strong> comparison regularized (<em>more / most</em>) though double comparison still used: <em>most unkindest</em> (Shakespeare).</li>
+        <li><strong>Pronouns:</strong> <em>thou/thee/thy</em> (singular, intimate) vs. <em>you/your</em> (plural or formal singular). The <em>thou</em> forms disappear in standard speech by 1700.</li>
+        <li><strong>Verbs:</strong> <em>-eth</em> (3rd sg: <em>hath, doth</em>) competes with <em>-s</em> (<em>has, does</em>); <em>-s</em> wins by 1700. <em>Be</em> forms varied: <em>be, art, is, am</em>.</li>
+        <li><strong>Great freedom:</strong> parts of speech used flexibly — nouns as verbs, verbs as nouns, free word order for emphasis. This flexibility is characteristic of Renaissance style.</li>
+        <li><strong>Do-periphrasis:</strong> auxiliary <em>do</em> for emphasis and questions (<em>Do you know?</em>) becomes standard during this period.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms</div>
+      <div class="terms">
+        <span class="term">Great Vowel Shift</span>
+        <span class="term">diphthong</span>
+        <span class="term">vowel raising</span>
+        <span class="term">thou/thee/thy</span>
+        <span class="term">do-periphrasis</span>
+        <span class="term">double comparison</span>
+        <span class="term">weakening of unaccented vowels</span>
+        <span class="term">verbal flexibility</span>
+      </div>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember"><strong>The Great Vowel Shift is the reason English spelling looks so strange:</strong> English spelling was largely fixed (by manuscript tradition and then printing) before or during the shift. The letters stayed the same while the sounds underneath them moved — so we have <em>name</em> with an <em>a</em> that now sounds like [eɪ], because it used to be pronounced [aː].</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 9A ─── -->
+<div class="lec-panel" id="lec-9a">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 9A · Chapter 9 · pp. 250–263</div>
+    <div class="lec-title">The Appeal to Authority, 1650–1800 — Part A</div>
+    <div class="lec-pages">Sections §186–§200</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">The 17th–18th centuries saw a dramatic shift in attitude: instead of freely enriching English, writers began calling for <strong>correctness, refinement, and fixity</strong>. The temper of the Augustan age demanded that English be "ascertained" (defined), "refined" (purified), and "fixed" (stopped from changing). This produced proposals for an English Academy, Swift's famous <em>Proposal</em>, Johnson's <em>Dictionary</em>, and the 18th-century grammar writers.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">The 18th-Century Attitude</div>
+      <ul class="concepts">
+        <li><strong>The "ascertainment" movement:</strong> desire to define and fix correct English usage — what is proper, what is incorrect.</li>
+        <li><strong>Three goals:</strong> (1) <em>ascertain</em> — define the language; (2) <em>refine</em> — purify it of vulgarisms; (3) <em>fix</em> — prevent further change.</li>
+        <li><strong>Analogy with classical languages:</strong> Latin was admired because it was fixed and didn't change. English scholars wanted the same.</li>
+        <li><strong>The English Academy proposal:</strong> Italian (Accademia della Crusca, 1582) and French (Académie française, 1635) had academic bodies to regulate their languages. Many wanted the same for English.</li>
+        <li><strong>Swift's <em>Proposal</em> (1712):</strong> addressed to the Earl of Oxford; called for an academy to fix English, expel "corruptions," and prevent change. Never acted upon.</li>
+        <li><strong>Objections to an academy:</strong> English distrust of government-controlled language; freedom of speech concerns; Defoe, Addison, and others were lukewarm.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Johnson's Dictionary (1755)</div>
+      <ul class="concepts">
+        <li><strong>Purpose:</strong> Johnson originally aimed to "fix" the language but eventually acknowledged language change was inevitable.</li>
+        <li><strong>Method:</strong> drew on literary citations from respected authors to illustrate correct usage.</li>
+        <li><strong>First great English dictionary:</strong> ~43,000 words, with definitions, etymologies, and illustrative quotations.</li>
+        <li><strong>Influence:</strong> enormous — for a century it was the authority on English usage. Established the tradition of the citation dictionary.</li>
+        <li><strong>Grammarians:</strong> Lowth (<em>Short Introduction to English Grammar</em>, 1762) and Priestley set the prescriptive tradition, using Latin as a model.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">ascertainment</span>
+        <span class="term">refinement</span>
+        <span class="term">fixing the language</span>
+        <span class="term">English Academy</span>
+        <span class="term">prescriptivism</span>
+        <span class="term">descriptivism</span>
+        <span class="term">lexicography</span>
+        <span class="term">citation dictionary</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1635</span><span class="scholar-name">Académie française founded in France</span></li>
+        <li><span class="scholar-date">1712</span><span class="scholar-name">Swift's <em>A Proposal for Correcting English</em></span></li>
+        <li><span class="scholar-date">1755</span><span class="scholar-name">Johnson's <em>Dictionary of the English Language</em></span></li>
+        <li><span class="scholar-date">1762</span><span class="scholar-name">Lowth's <em>Short Introduction to English Grammar</em></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 9B ─── -->
+<div class="lec-panel" id="lec-9b">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 9B · Chapter 9 · pp. 264–290</div>
+    <div class="lec-title">The Appeal to Authority, 1650–1800 — Part B</div>
+    <div class="lec-pages">Sections §201–§210</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">This section examines the methods and results of prescriptive grammar, the 18th-century attempts to reform vocabulary, the effect of British imperial expansion on English, and two important grammatical innovations: the <strong>progressive verb form</strong> and the <strong>progressive passive</strong>. It closes by reviewing the general character of English in this period.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Prescriptive Grammar — Methods &amp; Results</div>
+      <ul class="concepts">
+        <li><strong>Three methods of prescriptivists:</strong> (1) appeal to <em>logic</em> (double negatives are illogical — but all ME used them), (2) appeal to <em>Latin grammar</em> (don't split infinitives — because Latin can't), (3) appeal to <em>usage</em> (what educated writers use).</li>
+        <li><strong>Doctrine of usage:</strong> Swift, Addison, and others appealed to the usage of "polite" and "educated" society as the standard.</li>
+        <li><strong>Results:</strong> many rules were codified that had no logical basis — "never end a sentence with a preposition," "never split an infinitive." These rules still taught today despite no real justification.</li>
+        <li><strong>Weakness of grammarians:</strong> they often condemned forms that great writers had always used; their rules were inconsistent.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Expansion &amp; New Grammar</div>
+      <ul class="concepts">
+        <li><strong>British Empire's effect on vocabulary:</strong> words from India (<em>bungalow, jungle, shampoo, thug</em>), Arabic (<em>algebra, coffee</em>), Malay, and other languages enriched English.</li>
+        <li><strong>Progressive verb form (<em>be</em> + <em>-ing</em>):</strong> develops strongly in this period. "I am writing" (not just "I write"). This construction grew significantly in use and frequency during the 18th c.</li>
+        <li><strong>Progressive passive:</strong> "The house is being built" — a 19th-c. innovation that was initially criticized as a barbarism. Now completely standard.</li>
+        <li><strong>General characteristics:</strong> the period sees growing standardization, authority-based usage, and awareness of "correct" vs. "incorrect" English — attitudes that persist strongly today.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms</div>
+      <div class="terms">
+        <span class="term">prescriptivism</span>
+        <span class="term">doctrine of usage</span>
+        <span class="term">split infinitive</span>
+        <span class="term">double negative</span>
+        <span class="term">progressive form</span>
+        <span class="term">progressive passive</span>
+        <span class="term">empire loanwords</span>
+        <span class="term">analogy (grammar)</span>
+      </div>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember"><strong>Most "grammar rules" you were taught in school date from the 18th century</strong> — and many were invented, not discovered. The rule against split infinitives is based on Latin (which cannot split them, as it's one word). The rule against ending sentences with prepositions is the same. These rules are prescriptive, not descriptive of how native speakers actually use English.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 10 ─── -->
+<div class="lec-panel" id="lec-10">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 10 · Chapter 10 · pp. 291–342</div>
+    <div class="lec-title">The Nineteenth Century and After</div>
+    <div class="lec-pages">Sections §211–§237</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">The 19th and 20th centuries brought the greatest expansion of English vocabulary in history, driven by science, technology, war, mass media, and global reach. This chapter surveys new word sources, the social and stylistic levels of English, the global spread of English varieties, the rise of pidgins and creoles, and ends with the landmark <strong>Oxford English Dictionary</strong> and shifting attitudes toward language correctness.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">New Vocabulary (§211–§225)</div>
+      <ul class="concepts">
+        <li><strong>Science:</strong> thousands of new terms from Greek and Latin elements (<em>telephone, biology, chromosome, isotope, aviation</em>).</li>
+        <li><strong>Technology eras:</strong> automobile, film, radio/broadcasting, computers — each brought its own vocabulary layer.</li>
+        <li><strong>World Wars:</strong> <em>blitz, radar, commando, camouflage, jeep, tank</em>.</li>
+        <li><strong>Sources of new words:</strong> direct borrowing, self-explaining compounds, Greek/Latin elements, prefixes/suffixes, coinages, eponyms (words from proper names: <em>sandwich, wellington boot, boycott</em>), old words with new meanings.</li>
+        <li><strong>Journalism:</strong> promoted new colloquial words and shortened forms; influenced slang adoption into standard speech.</li>
+        <li><strong>Slang:</strong> its origins are obscure; it enters from many social groups — criminals, soldiers, sports — and some slang becomes permanent standard vocabulary.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">World Englishes &amp; the OED</div>
+      <ul class="concepts">
+        <li><strong>Standard Speech:</strong> RP (Received Pronunciation) in Britain — a prestige accent not tied to any region, associated with education and upper class.</li>
+        <li><strong>English World-Wide:</strong> varieties in Australia, New Zealand, South Africa, West/East Africa, South Asia, Singapore, the Caribbean.</li>
+        <li><strong>Pidgins:</strong> simplified contact languages with no native speakers, used for trade between groups with no common language.</li>
+        <li><strong>Creoles:</strong> pidgins that become native languages for a community — more complex grammatically than pidgins (<em>Tok Pisin, Jamaican Creole</em>).</li>
+        <li><strong>Spelling reform:</strong> 19th–20th c. movements (Pitman, Shaw) — largely failed.</li>
+        <li><strong>Gender &amp; language:</strong> <em>chairman → chairperson</em>; generic <em>he</em> questioned; singular <em>they</em> revived.</li>
+        <li><strong>Oxford English Dictionary (OED):</strong> begun 1857, first complete edition 1928. Based on citations showing actual historical usage. Largest dictionary in English; now online and continuously updated.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">eponym</span>
+        <span class="term">neologism</span>
+        <span class="term">slang</span>
+        <span class="term">RP (Received Pronunciation)</span>
+        <span class="term">pidgin</span>
+        <span class="term">creole</span>
+        <span class="term">World Englishes</span>
+        <span class="term">OED</span>
+        <span class="term">verb-adverb combination</span>
+        <span class="term">liberal creed</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1857</span><span class="scholar-name">OED project begins (Philological Society)</span></li>
+        <li><span class="scholar-date">1884–1928</span><span class="scholar-name">OED published in fascicles; completed 1928</span></li>
+        <li><span class="scholar-date">1989</span><span class="scholar-name">OED 2nd edition (20 volumes, ~600,000 words)</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LEC 11 ─── -->
+<div class="lec-panel" id="lec-11">
+  <div class="lec-header">
+    <div class="lec-eyebrow">Lecture 11 · Chapter 11 · pp. 343–397</div>
+    <div class="lec-title">The English Language in America</div>
+    <div class="lec-pages">Sections §238–§256</div>
+  </div>
+  <div class="lec-grid">
+    <div class="card wide">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="9.5" r=".8" fill="currentColor"/></svg>Overview</div>
+      <p class="overview-text">American English developed from 17th-century colonial transplantation through westward expansion, immigration, and cultural independence. Despite predictions of divergence, American English remained fundamentally the same language as British English, but with distinctive vocabulary, spelling, and pronunciation differences. This chapter covers settlement, Noah Webster's campaign for American linguistic independence, American dialects, and the controversy over "Americanisms."</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Settlement &amp; Development</div>
+      <ul class="concepts">
+        <li><strong>Thirteen colonies (1607–1733):</strong> settlers from different regions of England and Europe mixed, creating a relatively uniform American English — more uniform than British English, because regional distinctions were leveled out.</li>
+        <li><strong>Archaic features:</strong> American English preserved words and pronunciations that later disappeared in Britain — <em>gotten, fall (for autumn), sick (for ill)</em>. This makes AmE conservative in some ways.</li>
+        <li><strong>New vocabulary from contact:</strong> words from Native Americans (<em>moccasin, squash, raccoon, tomahawk</em>), Dutch (<em>boss, cookie, stoop, cruller</em>), French (<em>prairie, levee, bureau</em>), Spanish (<em>canyon, ranch, rodeo, adobe</em>).</li>
+        <li><strong>Westward expansion:</strong> each region contributed vocabulary and dialect features.</li>
+        <li><strong>Uniformity:</strong> American English is more uniform than British because settlers came from many regions, their dialects mixed, and mass communication leveled differences further.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Noah Webster &amp; American Identity</div>
+      <ul class="concepts">
+        <li><strong>National consciousness:</strong> after independence (1776), Americans wanted linguistic as well as political independence from Britain.</li>
+        <li><strong>Noah Webster (1758–1843):</strong> the great champion of American English. Argued American English should have its own standards, independent of British authority.</li>
+        <li><strong>Spelling reform:</strong> Webster simplified spellings: <em>color</em> (not <em>colour</em>), <em>center</em> (not <em>centre</em>), <em>plow</em> (not <em>plough</em>), <em>honor</em> (not <em>honour</em>).</li>
+        <li><strong>Webster's dictionary (1828):</strong> <em>An American Dictionary of the English Language</em> — first great American dictionary; codified American spellings and usages.</li>
+        <li><strong>Pronunciation:</strong> Webster advocated American pronunciations as equally valid; some spread, some did not.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">American Dialects &amp; Varieties</div>
+      <ul class="concepts">
+        <li><strong>Major American dialect regions:</strong> Eastern New England, New York City, Upper/Lower North, Upper/Lower South, General American (the "standard" of broadcast English).</li>
+        <li><strong>African American Vernacular English (AAVE):</strong> a systematic dialect with its own consistent grammatical rules — not "bad English" but a rule-governed variety with unique features.</li>
+        <li><strong>Hispanic American English:</strong> growing variety influenced by Spanish phonology and syntax.</li>
+        <li><strong>Controversy over Americanisms:</strong> 19th-c. British critics condemned American words as corruptions; 20th-c. American words flooded back into British English.</li>
+        <li><strong>Present vocabulary differences:</strong> AmE <em>elevator / BrE lift; AmE trunk / BrE boot (of a car); AmE gasoline / BrE petrol</em>.</li>
+        <li><strong>American English and World English:</strong> American English is now the dominant global variety; American cultural exports spread its vocabulary worldwide.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Key Terms &amp; Dates</div>
+      <div class="terms" style="margin-bottom:14px">
+        <span class="term">Americanism</span>
+        <span class="term">archaic preservation</span>
+        <span class="term">dialect leveling</span>
+        <span class="term">General American</span>
+        <span class="term">AAVE</span>
+        <span class="term">Noah Webster</span>
+        <span class="term">American spelling</span>
+        <span class="term">linguistic independence</span>
+        <span class="term">isogloss</span>
+        <span class="term">Americanism controversy</span>
+      </div>
+      <ul class="scholar-list">
+        <li><span class="scholar-date">1607</span><span class="scholar-name">Jamestown — first permanent English settlement</span></li>
+        <li><span class="scholar-date">1776</span><span class="scholar-name">American independence; linguistic nationalism begins</span></li>
+        <li><span class="scholar-date">1783</span><span class="scholar-name">Webster's <em>Blue-Back Speller</em> — codifies American spelling</span></li>
+        <li><span class="scholar-date">1828</span><span class="scholar-name">Webster's <em>American Dictionary</em> published</span></li>
+      </ul>
+    </div>
+    <div class="card wide">
+      <div class="card-title">Remember This</div>
+      <div class="remember2"><strong>American English is conservative, not corrupt.</strong> Many features that British critics called "Americanisms" (like <em>gotten, fall, sick</em>) are actually older English usages preserved in America that died out in Britain. American English is not a degraded form of British English — it is a parallel development, sometimes more archaic, sometimes more innovative.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ── Tab switching ──
+const panels = {
+  '1': document.getElementById('lec-1'),
+  '2': document.getElementById('lec-2'),
+  '3': document.getElementById('lec-3'),
+  '4': document.getElementById('lec-4'),
+  '5': document.getElementById('lec-5'),
+  '6': document.getElementById('lec-6'),
+  '7a': document.getElementById('lec-7a'),
+  '7b': document.getElementById('lec-7b'),
+  '8a': document.getElementById('lec-8a'),
+  '8b': document.getElementById('lec-8b'),
+  '9a': document.getElementById('lec-9a'),
+  '9b': document.getElementById('lec-9b'),
+  '10': document.getElementById('lec-10'),
+  '11': document.getElementById('lec-11'),
+};
+let activeLec = '1';
+
+function switchLec(id) {
+  if (!panels[id]) return;
+  const prevPanel = panels[activeLec];
+  if (prevPanel) prevPanel.classList.remove('active');
+  panels[id].classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lec === id);
+  });
+  activeLec = id;
+  // scroll active tab into view
+  const btn = document.querySelector(`.tab-btn[data-lec="${id}"]`);
+  if (btn) btn.scrollIntoView({inline: 'center', block: 'nearest', behavior: 'smooth'});
+  // save
+  try { localStorage.setItem('hel-tab', id); } catch(e) {}
+}
+
+document.getElementById('tab-strip').addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if (btn) switchLec(btn.dataset.lec);
+});
+
+// restore tab
+try {
+  const saved = localStorage.getItem('hel-tab');
+  if (saved && panels[saved]) switchLec(saved);
+} catch(e) {}
+
+// ── Theme toggle ──
+const root = document.documentElement;
+const themeBtn = document.getElementById('theme-btn');
+function applyTheme(t) {
+  if (t === 'dark') { root.dataset.theme = 'dark'; themeBtn.textContent = '☀︎'; }
+  else if (t === 'light') { root.dataset.theme = 'light'; themeBtn.textContent = '◑'; }
+  else { delete root.dataset.theme; themeBtn.textContent = '☀︎'; }
+}
+themeBtn.addEventListener('click', () => {
+  const cur = root.dataset.theme;
+  const next = cur === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('hel-theme', next); } catch(e) {}
+});
+try {
+  const saved = localStorage.getItem('hel-theme');
+  if (saved) applyTheme(saved);
+} catch(e) {}
+
+// ── Search ──
+const searchBox = document.getElementById('search-box');
+const searchClear = document.getElementById('search-clear');
+const noResults = document.getElementById('no-results');
+
+function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function clearHighlights() {
+  document.querySelectorAll('.search-hl').forEach(el => {
+    const parent = el.parentNode;
+    parent.replaceChild(document.createTextNode(el.textContent), el);
+    parent.normalize();
+  });
+  document.querySelectorAll('.term').forEach(t => t.classList.remove('highlight'));
+}
+
+function highlightNode(node, re) {
+  if (node.nodeType === 3) {
+    const m = re.exec(node.textContent);
+    if (!m) return false;
+    const span = document.createElement('mark');
+    span.className = 'search-hl';
+    const before = document.createTextNode(node.textContent.slice(0, m.index));
+    const after = document.createTextNode(node.textContent.slice(m.index + m[0].length));
+    span.textContent = m[0];
+    const frag = document.createDocumentFragment();
+    frag.appendChild(before); frag.appendChild(span); frag.appendChild(after);
+    node.parentNode.replaceChild(frag, node);
+    return true;
+  }
+  return false;
+}
+
+function highlightAll(container, re) {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => (n.parentNode.nodeName !== 'SCRIPT' && n.parentNode.nodeName !== 'STYLE' && n.parentNode.className !== 'search-hl') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+  });
+  const nodes = [];
+  let n;
+  while ((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(node => highlightNode(node, re));
+}
+
+function doSearch(q) {
+  clearHighlights();
+  if (!q) {
+    Object.values(panels).forEach(p => { p.style.display = ''; });
+    noResults.style.display = 'none';
+    switchLec(activeLec);
+    return;
+  }
+  const re = new RegExp(escapeRe(q), 'gi');
+  let anyVisible = false;
+  let firstId = null;
+
+  Object.entries(panels).forEach(([id, panel]) => {
+    // test text
+    const text = panel.textContent;
+    if (re.test(text)) {
+      panel.style.display = 'block';
+      if (!firstId) firstId = id;
+      anyVisible = true;
+      re.lastIndex = 0;
+      // highlight terms
+      panel.querySelectorAll('.term').forEach(t => {
+        if (re.test(t.textContent)) { t.classList.add('highlight'); re.lastIndex = 0; }
+      });
+      highlightAll(panel, re);
+    } else {
+      panel.style.display = 'none';
+    }
+    re.lastIndex = 0;
+  });
+
+  noResults.style.display = anyVisible ? 'none' : 'block';
+  if (firstId) {
+    // show first match panel in tab strip
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lec === firstId);
+    });
+    activeLec = firstId;
+  }
+}
+
+searchBox.addEventListener('input', () => {
+  const q = searchBox.value.trim();
+  searchClear.hidden = !q;
+  doSearch(q);
+});
+searchClear.addEventListener('click', () => {
+  searchBox.value = '';
+  searchClear.hidden = true;
+  doSearch('');
+});
+</script>
+
+</body></html>
